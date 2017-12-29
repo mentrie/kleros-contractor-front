@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Blockies from 'react-blockies';
 
 import Contracts from './containers/Contracts';
+import ContractSummary from './containers/Summary';
 import logo from './assets/kleros.png'
 
 
@@ -166,6 +167,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Contracts} />
             {/* <Route path='/contract-new' component={NewContract} /> */}
+            <Route path='/contract-summary' component={ContractSummary} />
           </Switch>
         </Router>
       </div>
