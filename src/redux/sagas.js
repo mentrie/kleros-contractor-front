@@ -19,6 +19,7 @@ function* fetchUserContracts() {
   try {
     const accounts = yield call(getAccounts);
     const data = accounts[0] ? yield call(kleros.arbitrator.getContractsForUser, accounts[0].toLowerCase()): [];
+    // Only keep the addresses in the store until a full data request is made
     yield put(fetchUserContractsSuccess(data.map(item => item.address)));
   } catch (e) {
 
@@ -54,7 +55,9 @@ function* createContract({payload}) {
 
 function* fetchContractData({address}) {
   try {
-    
+    const accounts = yield call(getAccounts);
+    const data = accounts[0] ? yield call(kleros.arbitrableContract.getData, address.toLowerCase()): {};
+    yield put(fetchUserContractsSuccess(data));
   } catch (e) {
     // TODO: Fix error    
     console.log(e)
